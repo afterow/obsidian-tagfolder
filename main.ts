@@ -1202,8 +1202,8 @@ class TagFolderSettingTab extends PluginSettingTab {
 
 		containerEl.createEl("h3", { text: "Behavior" });
 		new Setting(containerEl)
-			.setName("Always Open")
-			.setDesc("Place TagFolder on the left pane and activate it at every Obsidian launch")
+			.setName("打开")
+			.setDesc("将TagFolder放置在左侧面板，并在每次启动Obsidian时激活它")
 			.addToggle((toggle) =>
 				toggle
 					.setValue(this.plugin.settings.alwaysOpen)
@@ -1213,9 +1213,9 @@ class TagFolderSettingTab extends PluginSettingTab {
 					})
 			);
 		new Setting(containerEl)
-			.setName("Use pinning")
+			.setName("使用固定功能")
 			.setDesc(
-				"When this feature is enabled, the pin information is saved in the file set in the next configuration."
+				"启用此功能后，固定信息将被保存在下一个配置中指定的文件中"
 			)
 			.addToggle((toggle) => {
 				toggle
@@ -1230,7 +1230,7 @@ class TagFolderSettingTab extends PluginSettingTab {
 					});
 			});
 		const pi = new Setting(containerEl)
-			.setName("Pin information file")
+			.setName("源信息pin文件")
 			.setDisabled(!this.plugin.settings.useTagInfo)
 			.addText((text) => {
 				text
@@ -1244,9 +1244,9 @@ class TagFolderSettingTab extends PluginSettingTab {
 					});
 			});
 		new Setting(containerEl)
-			.setName("Disable narrowing down")
+			.setName("禁用缩小选项")
 			.setDesc(
-				"When this feature is enabled, relevant tags will be shown with the title instead of making a sub-structure."
+				"当此功能启用时，收集到的组合将不再按结构排列，而是以我们组织的方式显示。启用此功能后，相关标签将与标题一同显示，而不是形成子结构。"
 			)
 			.addToggle((toggle) => {
 				toggle
@@ -1256,16 +1256,16 @@ class TagFolderSettingTab extends PluginSettingTab {
 						await this.plugin.saveSettings();
 					});
 			});
-		containerEl.createEl("h3", { text: "Files" });
+		containerEl.createEl("h3", { text: "文件" });
 		new Setting(containerEl)
-			.setName("Display method")
-			.setDesc("How to show a title of files")
+			.setName("显示方法")
+			.setDesc("如何显示文件的标题")
 			.addDropdown((dropdown) =>
 				dropdown
 					.addOptions({
 						"PATH/NAME": "PATH/NAME",
-						NAME: "NAME",
-						"NAME : PATH": "NAME : PATH",
+						NAME: "名字",
+						"名字 : 路径": "名字 : 路径",
 					})
 					.setValue(this.plugin.settings.displayMethod)
 					.onChange(async (value) => {
@@ -1284,8 +1284,8 @@ class TagFolderSettingTab extends PluginSettingTab {
 			// this.plugin.setRoot(this.plugin.root);
 		};
 		new Setting(containerEl)
-			.setName("Order method")
-			.setDesc("how to order items")
+			.setName("排序方法")
+			.setDesc("如何排序")
 			.addDropdown((dd) => {
 				dd.addOptions(OrderKeyItem)
 					.setValue(this.plugin.settings.sortType.split("_")[0])
@@ -1297,8 +1297,8 @@ class TagFolderSettingTab extends PluginSettingTab {
 					.onChange((order) => setOrderMethod(undefined, order));
 			});
 		new Setting(containerEl)
-			.setName("Prioritize items which are not contained in sub-folder")
-			.setDesc("If this has been enabled, the items which have no more extra tags are first.")
+			.setName("优先排序不在子文件夹中的项目")
+			.setDesc("如果启用此功能，则没有任何额外标签的项目将首先被排序。")
 			.addToggle((toggle) => {
 				toggle
 					.setValue(this.plugin.settings.sortExactFirst)
@@ -1308,9 +1308,9 @@ class TagFolderSettingTab extends PluginSettingTab {
 					});
 			});
 		new Setting(containerEl)
-			.setName("Use title")
+			.setName("使用标题")
 			.setDesc(
-				"Use value in the frontmatter or first level one heading for `NAME`."
+				"使用前置事项/(frontmatter/)或一级标题/(level one heading/)中的值作为NAME。"
 			)
 			.addToggle((toggle) => {
 				toggle
@@ -1322,7 +1322,7 @@ class TagFolderSettingTab extends PluginSettingTab {
 					});
 			});
 		const fpath = new Setting(containerEl)
-			.setName("Frontmatter path")
+			.setName("前置事项路径")
 			.setDisabled(!this.plugin.settings.useTitle)
 			.addText((text) => {
 				text
@@ -1333,7 +1333,7 @@ class TagFolderSettingTab extends PluginSettingTab {
 					});
 			});
 
-		containerEl.createEl("h3", { text: "Tags" });
+		containerEl.createEl("h3", { text: "标签tags" });
 
 		const setOrderMethodTag = async (key?: string, order?: string) => {
 			const oldSetting = this.plugin.settings.sortTypeTag.split("_");
@@ -1345,8 +1345,8 @@ class TagFolderSettingTab extends PluginSettingTab {
 			// this.plugin.setRoot(this.plugin.root);
 		};
 		new Setting(containerEl)
-			.setName("Order method")
-			.setDesc("how to order tags")
+			.setName("排序方式")
+			.setDesc("如何对标签进行排序")
 			.addDropdown((dd) => {
 				dd.addOptions(OrderKeyTag)
 					.setValue(this.plugin.settings.sortTypeTag.split("_")[0])
@@ -1360,7 +1360,7 @@ class TagFolderSettingTab extends PluginSettingTab {
 
 
 		new Setting(containerEl)
-			.setName("Use virtual tags")
+			.setName("使用虚拟标签")
 			.addToggle((toggle) => {
 				toggle
 					.setValue(this.plugin.settings.useVirtualTag)
@@ -1371,8 +1371,8 @@ class TagFolderSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
-			.setName("Store tags in frontmatter for new notes")
-			.setDesc("Otherwise, tags are stored with #hashtags at the top of the note")
+			.setName("在新笔记的前置事项中存储标")
+			.setDesc("否则，标签将以#哈希标签的形式存储在笔记的顶部")
 			.addToggle((toggle) => {
 				toggle
 					.setValue(this.plugin.settings.useFrontmatterTagsForNewNotes)
